@@ -25,10 +25,12 @@ namespace _8_1_TripLog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
             services.AddDbContext<TripLogContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("TripLogContext")));
+                options.UseSqlite(
+                    Configuration.GetConnectionString("TripLogContext")));
+            
         }
+
 
         // Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)

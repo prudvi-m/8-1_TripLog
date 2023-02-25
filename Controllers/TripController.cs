@@ -16,6 +16,7 @@ namespace _8_1_TripLog.Controllers
         {
             var vm = new TripViewModel();
 
+            TempData.Peek("data");
             /********************************************************************************************
              * need to pass Accommodation value, or Destintation value (depending on page number and
              * Accommodation value), to by view.
@@ -23,7 +24,7 @@ namespace _8_1_TripLog.Controllers
              * Accommodation is an optional value - don't need it to persist after being read if it's null.
              * So, do straight read, and if it's not null, use Keep() method to make sure it persists.
              * 
-             * Destination is a required value - always need it to persistafter being read.
+             * Destination is a required value - always need it to persist after being read.
              * So, use Peek() method to read it and make sure it persists.
              * *****************************************************************************************/
 
@@ -41,6 +42,7 @@ namespace _8_1_TripLog.Controllers
                     vm.PageNumber = 2;
                     vm.Trip = new Trip { Accommodation = accommodation };
                     TempData.Keep(nameof(Trip.Accommodation));
+                    // TempData.Keep("data");
                     return View("Add2", vm);
                 }
             }
@@ -101,11 +103,18 @@ namespace _8_1_TripLog.Controllers
                 vm.Trip.AccommodationPhone = TempData[nameof(Trip.AccommodationPhone)]?.ToString();
                 vm.Trip.AccommodationEmail = TempData[nameof(Trip.AccommodationEmail)]?.ToString();
 
+                TempData["ThingToDo1"] = vm.Trip.ThingToDo1;
+                TempData["ThingToDo2"] = vm.Trip.ThingToDo2;
+                TempData["ThingToDo3"] = vm.Trip.ThingToDo3;
+
+                // TempData.Keep("ThingToDo1");
+                // TempData.Keep("ThingToDo2");
+                // TempData.Keep("ThingToDo3");
                 // context.Trips.Add(vm.Trip);
                 // context.SaveChanges();
 
                 TempData["message"] = $"Trip to {vm.Trip.Destination} added.";
-                return RedirectToAction("Index", "Home", new { data = vm });
+                return RedirectToAction("Index", "Home");
             }
             else
             {
