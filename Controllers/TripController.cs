@@ -17,22 +17,11 @@ namespace TripLog.Controllers
             var vm = new TripViewModel();
 
             TempData.Peek("data");
-            /********************************************************************************************
-             * need to pass Accommodation value, or Destintation value (depending on page number and
-             * Accommodation value), to by view.
-             * 
-             * Accommodation is an optional value - don't need it to persist after being read if it's null.
-             * So, do straight read, and if it's not null, use Keep() method to make sure it persists.
-             * 
-             * Destination is a required value - always need it to persist after being read.
-             * So, use Peek() method to read it and make sure it persists.
-             * *****************************************************************************************/
-
             if (id.ToLower() == "page2")
             {
                 var accommodation = TempData[nameof(Trip.Accommodation)]?.ToString();
 
-                if (string.IsNullOrEmpty(accommodation)) {  //skip to page 3
+                if (string.IsNullOrEmpty(accommodation)) {
                     vm.PageNumber = 3;
                     var destination = TempData.Peek(nameof(Trip.Destination)).ToString();
                     vm.Trip = new Trip { Destination = destination };
@@ -42,7 +31,6 @@ namespace TripLog.Controllers
                     vm.PageNumber = 2;
                     vm.Trip = new Trip { Accommodation = accommodation };
                     TempData.Keep(nameof(Trip.Accommodation));
-                    // TempData.Keep("data");
                     return View("Add2", vm);
                 }
             }
@@ -50,7 +38,6 @@ namespace TripLog.Controllers
             {
                 vm.PageNumber = 3;
                 vm.Trip = new Trip { Destination = TempData.Peek(nameof(Trip.Destination)).ToString() };
-
                 return View("Add3", vm);
             }
             else
@@ -65,11 +52,8 @@ namespace TripLog.Controllers
         {
             if (vm.PageNumber == 1)
             {
-                if (ModelState.IsValid) // only 1 page has required data
+                if (ModelState.IsValid)
                 {
-                    /****************************************************
-                    * Store data in TempData and redirect (PRG pattern)
-                    ****************************************************/
                     TempData[nameof(Trip.Destination)] = vm.Trip.Destination;
                     TempData[nameof(Trip.Accommodation)] = vm.Trip.Accommodation;
                     TempData[nameof(Trip.StartDate)] = vm.Trip.StartDate;
@@ -77,25 +61,16 @@ namespace TripLog.Controllers
                     return RedirectToAction("Add", new { id = "Page2" });
                 }
                 else
-                {
                     return View("Add1", vm);
-                }
             }
             else if (vm.PageNumber == 2)
             {
-                /****************************************************
-                * Store data in TempData and redirect (PRG pattern)
-                ****************************************************/
                 TempData[nameof(Trip.AccommodationPhone)] = vm.Trip.AccommodationPhone;
                 TempData[nameof(Trip.AccommodationEmail)] = vm.Trip.AccommodationEmail;
                 return RedirectToAction("Add", new { id = "Page3" });
             }
             else if (vm.PageNumber == 3)
             {
-                /****************************************************
-                * Don't need data in TempData to persist after
-                * updating database, so do straight read.
-                ****************************************************/
                 vm.Trip.Destination = TempData[nameof(Trip.Destination)].ToString();
                 vm.Trip.Accommodation = TempData[nameof(Trip.Accommodation)]?.ToString();
                 vm.Trip.StartDate = (DateTime)TempData[nameof(Trip.StartDate)];
@@ -107,20 +82,11 @@ namespace TripLog.Controllers
                 TempData["ThingToDo2"] = vm.Trip.ThingToDo2;
                 TempData["ThingToDo3"] = vm.Trip.ThingToDo3;
 
-                // TempData.Keep("ThingToDo1");
-                // TempData.Keep("ThingToDo2");
-                // TempData.Keep("ThingToDo3");
-                // context.Trips.Add(vm.Trip);
-                // context.SaveChanges();
-
                 TempData["message"] = $"Trip to {vm.Trip.Destination} added.";
                 return RedirectToAction("Index", "Home");
             }
             else
-            {
                 return RedirectToAction("Index", "Home");
-            }
-
         }
         
         public RedirectToActionResult Cancel()

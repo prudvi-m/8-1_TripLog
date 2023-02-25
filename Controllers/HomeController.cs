@@ -12,7 +12,7 @@ namespace TripLog.Controllers
         private TripLogContext context { get; set; }
         public HomeController(TripLogContext ctx) => context = ctx;
 
-        public ViewResult Index() 
+        public ViewResult Index()
         {
             var trips = new List<Trip>();
             if(TempData.ContainsKey("Destination") && TempData.ContainsKey("data") && TempData["data"] != null) {
