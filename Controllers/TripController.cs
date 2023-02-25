@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using _8_1_TripLog.Models;
+using TripLog.Models;
 
-namespace _8_1_TripLog.Controllers
+namespace TripLog.Controllers
 {
     public class TripController : Controller
     {

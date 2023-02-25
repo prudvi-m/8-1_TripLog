@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _8_1_TripLog
+namespace TripLog
 {
     public class Program
     {

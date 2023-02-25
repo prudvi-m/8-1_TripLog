@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using _8_1_TripLog.Models;
+using TripLog.Models;
 
-namespace _8_1_TripLog
+namespace TripLog
 {
     public class Startup
     {

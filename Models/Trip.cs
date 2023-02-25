@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace _8_1_TripLog.Models
+namespace TripLog.Models
 {
     public class Trip
     {

@@ -2,10 +2,10 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using _8_1_TripLog.Models;
+using TripLog.Models;
 using Newtonsoft.Json;
 
-namespace _8_1_TripLog.Controllers
+namespace TripLog.Controllers
 {
     public class HomeController : Controller
     {

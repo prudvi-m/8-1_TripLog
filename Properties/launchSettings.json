@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "_8_1_TripLog": {
+    "TripLog": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
