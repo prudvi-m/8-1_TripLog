@@ -25,12 +25,10 @@ namespace TripLog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<TripLogContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("TripLogContext")));
-            
+            services.AddDbContext<TripLogContext>(
+                options => options.UseSqlite(Configuration.GetConnectionString("TripLogContext"))
+            );
         }
-
 
         // Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
@@ -44,7 +42,8 @@ namespace TripLog
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
     }
