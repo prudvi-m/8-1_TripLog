@@ -7,6 +7,7 @@ namespace TripLog.Controllers
     public class TripController : Controller
     {
         private TripLogContext context { get; set; }
+
         public TripController(TripLogContext ctx) => context = ctx;
 
         public RedirectToActionResult Index() => RedirectToAction("Index", "Home");
@@ -21,13 +22,15 @@ namespace TripLog.Controllers
             {
                 var accommodation = TempData[nameof(Trip.Accommodation)]?.ToString();
 
-                if (string.IsNullOrEmpty(accommodation)) {
+                if (string.IsNullOrEmpty(accommodation))
+                {
                     vm.PageNumber = 3;
                     var destination = TempData.Peek(nameof(Trip.Destination)).ToString();
                     vm.Trip = new Trip { Destination = destination };
                     return View("Add3", vm);
                 }
-                else {
+                else
+                {
                     vm.PageNumber = 2;
                     vm.Trip = new Trip { Accommodation = accommodation };
                     TempData.Keep(nameof(Trip.Accommodation));
@@ -37,7 +40,10 @@ namespace TripLog.Controllers
             else if (id.ToLower() == "page3")
             {
                 vm.PageNumber = 3;
-                vm.Trip = new Trip { Destination = TempData.Peek(nameof(Trip.Destination)).ToString() };
+                vm.Trip = new Trip
+                {
+                    Destination = TempData.Peek(nameof(Trip.Destination)).ToString()
+                };
                 return View("Add3", vm);
             }
             else
@@ -88,7 +94,7 @@ namespace TripLog.Controllers
             else
                 return RedirectToAction("Index", "Home");
         }
-        
+
         public RedirectToActionResult Cancel()
         {
             TempData.Clear();

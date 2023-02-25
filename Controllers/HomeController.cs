@@ -28,25 +28,13 @@ namespace TripLog.Controllers
                     {
                         Destination = (string)TempData["Destination"],
                         Accommodation = (string)TempData["Accommodation"],
+                        AccommodationPhone = (string)TempData["AccommodationPhone"],
+                        AccommodationEmail = (string)TempData["AccommodationEmail"],
                         StartDate = (DateTime)TempData["StartDate"],
                         EndDate = (DateTime)TempData["EndDate"],
                         ThingToDo1 = (string)TempData["ThingToDo1"],
                         ThingToDo2 = (string)TempData["ThingToDo2"],
                         ThingToDo3 = (string)TempData["ThingToDo3"]
-                    }
-                );
-            }
-            else
-            {
-                trips.Add(
-                    new Trip()
-                    {
-                        Destination = "New York",
-                        Accommodation = "The ritz",
-                        AccommodationPhone = "555-123-4567",
-                        AccommodationEmail = "contact@theritz.com",
-                        ThingToDo1 = "Go to a show",
-                        ThingToDo2 = "Ride the subway",
                     }
                 );
             }
