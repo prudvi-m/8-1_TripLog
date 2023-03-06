@@ -24,10 +24,18 @@ namespace TripLog
         // Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+            });
+            services.AddHttpContextAccessor();
             services.AddDbContext<TripLogContext>(
                 options => options.UseSqlite(Configuration.GetConnectionString("TripLogContext"))
             );
+            
         }
 
         // Use this method to configure the HTTP request pipeline.
@@ -38,6 +46,7 @@ namespace TripLog
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
