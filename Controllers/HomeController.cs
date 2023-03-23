@@ -1,10 +1,10 @@
-﻿using _8_1_TripLog.Models;
+﻿using TripLog.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Collections.Generic;
-using _8_1_TripLog.Models;
+using TripLog.Models;
 using System;
-namespace _8_1_TripLog.Controllers
+namespace TripLog.Controllers
 {
     public class HomeController : Controller
     {

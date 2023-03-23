@@ -1,4 +1,4 @@
-﻿namespace _8_1_TripLog.Models
+﻿namespace TripLog.Models
 {
     public class TripViewModel
     {

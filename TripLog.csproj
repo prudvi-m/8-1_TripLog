@@ -3,7 +3,7 @@
   <PropertyGroup>
     <!-- <TargetFramework>net5.0</TargetFramework> -->
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>_8_1_TripLog</RootNamespace>
+    <RootNamespace>TripLog</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
