@@ -101,8 +101,8 @@ namespace _8_1_TripLog.Controllers
                 vm.Trip.AccommodationPhone = TempData[nameof(Trip.AccommodationPhone)]?.ToString();
                 vm.Trip.AccommodationEmail = TempData[nameof(Trip.AccommodationEmail)]?.ToString();
 
-                // context.Trips.Add(vm.Trip);
-                // context.SaveChanges();
+                context.Trips.Add(vm.Trip);
+                context.SaveChanges();
 
                 TempData["message"] = $"Trip to {vm.Trip.Destination} added.";
                 return RedirectToAction("Index", "Home", new { data = vm });
