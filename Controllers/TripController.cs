@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using TripLog.Models;
-
 
 namespace TripLog.Controllers
 {
@@ -19,7 +17,22 @@ namespace TripLog.Controllers
         {
             var vm = new TripViewModel();
 
+<<<<<<< HEAD
             // HttpContext.Session.SetString(nameof(Trip.Destination), JsonConvert.SerializeObject(trips).ToString());
+=======
+            TempData.Peek("data");
+            /********************************************************************************************
+             * need to pass Accommodation value, or Destintation value (depending on page number and
+             * Accommodation value), to by view.
+             * 
+             * Accommodation is an optional value - don't need it to persist after being read if it's null.
+             * So, do straight read, and if it's not null, use Keep() method to make sure it persists.
+             * 
+             * Destination is a required value - always need it to persist after being read.
+             * So, use Peek() method to read it and make sure it persists.
+             * *****************************************************************************************/
+
+>>>>>>> 3ea2639 (current)
             if (id.ToLower() == "page2")
             {
                 var accommodation = HttpContext.Session.GetString("Accommodation");
@@ -36,8 +49,13 @@ namespace TripLog.Controllers
                 {
                     vm.PageNumber = 2;
                     vm.Trip = new Trip { Accommodation = accommodation };
+<<<<<<< HEAD
                     // TempData.Keep(nameof(Trip.Accommodation));
                     HttpContext.Session.SetString("Accommodation", accommodation);
+=======
+                    TempData.Keep(nameof(Trip.Accommodation));
+                    // TempData.Keep("data");
+>>>>>>> 3ea2639 (current)
                     return View("Add2", vm);
                 }
             }
@@ -95,6 +113,7 @@ namespace TripLog.Controllers
                 // vm.Trip.AccommodationPhone = TempData[nameof(Trip.AccommodationPhone)]?.ToString();
                 // vm.Trip.AccommodationEmail = TempData[nameof(Trip.AccommodationEmail)]?.ToString();
 
+<<<<<<< HEAD
 
                 // HttpContext.Session.GetString(
                 vm.Trip.Destination = HttpContext.Session.GetString("Destination");
@@ -110,6 +129,20 @@ namespace TripLog.Controllers
                 HttpContext.Session.SetString("ThingToDo3", vm.Trip.ThingToDo3);
 
                 TempData["message"] = $"Trip to {vm.Trip.Destination} added.";
+=======
+                TempData["ThingToDo1"] = vm.Trip.ThingToDo1;
+                TempData["ThingToDo2"] = vm.Trip.ThingToDo2;
+                TempData["ThingToDo3"] = vm.Trip.ThingToDo3;
+
+                context.Trips.Add(vm.Trip);
+                context.SaveChanges();
+
+                TempData["message"] = $"Trip to {vm.Trip.Destination} added.";
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+>>>>>>> 3ea2639 (current)
                 return RedirectToAction("Index", "Home");
             }
             else

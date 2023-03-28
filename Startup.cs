@@ -26,17 +26,12 @@ namespace TripLog
         {
             
             services.AddControllersWithViews();
-            services.AddDistributedMemoryCache();
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-            });
-            services.AddHttpContextAccessor();
-            services.AddDbContext<TripLogContext>(
-                options => options.UseSqlite(Configuration.GetConnectionString("TripLogContext"))
-            );
+            services.AddDbContext<TripLogContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("TripLogContext")));
             
         }
+
 
         // Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
